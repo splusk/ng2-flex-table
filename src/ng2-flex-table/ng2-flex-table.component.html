@@ -32,6 +32,10 @@
                 <td *ngFor="let column of headerData " (dblclick)="editValue($event, d, column)" [class.sorted]="order === column">
                     <input class="table__input" type="text" value="{{ d[column] || '' }}" disabled>
                 </td>
+                <td>
+                     <button (click)="alert(item)" class="btn btn-danger">x</button>
+                </td>
+
             </tr>
         </tbody>
     </table>
