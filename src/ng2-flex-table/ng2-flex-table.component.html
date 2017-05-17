@@ -30,22 +30,21 @@
         <tbody class="ng2-flex-table__body" >
             <tr *ngFor="let d of tabledata | filterBy: filter | orderBy: order : reverse " >
                 <td *ngFor="let column of headerData " [class.sorted]="order === column">
-                    <div *ngIf="column != 'action'; else elseBlock2">
-						<input class="table__input" type="text" value="{{ d[column] || '' }}" disabled>
-					</div>
-					<div *ngIf="column === 'action'; else elseBlock2">
-						<button (click)="clickAction(d)" class="btn btn-danger">re-process</button>
-					</div>
+                    <div *ngIf="column != 'action'; else empty">
+                        <input class="table__input" type="text" value="{{ d[column] || '' }}" disabled>
+                    </div>
+                    <div *ngIf="column === 'action'; else empty">
+                        <button (click)="clickAction(d)" class="btn btn-danger">re-process</button>
+                    </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 <ng-template #thenBlock>
-	<input class="table__input" type="text" value="{{ d[column] || '' }}" disabled>
+    <input class="table__input" type="text" value="{{ d[column] || '' }}" disabled>
 </ng-template>
 <ng-template #elseBlock>
-	<button (click)="clickAction(d)" class="btn btn-danger">re-process</button>
+    <button (click)="clickAction(d)" class="btn btn-danger">re-process</button>
 </ng-template>
 <ng-template #empty/>
-
