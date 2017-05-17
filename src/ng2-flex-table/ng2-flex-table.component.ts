@@ -9,6 +9,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 export class TableComponent implements OnInit {
   @Input() tabledata: Array<any> = [];
   @Output() outEvent: EventEmitter<{ type: string, data: string | Array<any> }>;
+  @Output() clickEvent: EventEmitter<{ type: string, data: string | Array<any> }>;
 
   headerData: string[];
   isEditing: EventTarget;
@@ -19,6 +20,7 @@ export class TableComponent implements OnInit {
 
   constructor() {
     this.outEvent = new EventEmitter<{ type: string, data: string | Array<any> }>();
+    this.clickEvent = new EventEmitter<{ type: string, data: string | Array<any> }>();
   }
 
   ngOnInit(): void {
@@ -36,6 +38,10 @@ export class TableComponent implements OnInit {
         });
       return acc;
     }, []);
+  }
+  
+  clickAction(obj: any) {
+    this.outEvent.emit({ type: 'rowClicked', data: obj });
   }
 
   editValue(e: MouseEvent, obj: any, property: string): void {
